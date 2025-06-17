@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import ClientsOnly from "./components/ClientsOnly";
 import  RegisterModal  from "./components/modals/RegisterModal";
 import ToasterProvider from "./Providerrs/ToasterProvider";
+import LoginModal from "./components/modals/LoginModal";
 
 export const metadata = {
   title: "Stayfinder",
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={font.className}>
         <ClientsOnly>
           <ToasterProvider />
+          <LoginModal />
           <RegisterModal />
           <Navbar />
         </ClientsOnly>

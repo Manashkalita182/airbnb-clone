@@ -3,10 +3,11 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@/app/libs/prismadb"; // adjust if path differs
-import bcrypt from "bcrypt";
+import { prisma } from "@/app/libs/prismadb";
+import bcrypt from "bcryptjs";
 
-const handler = NextAuth({
+// Define the NextAuth options
+const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
@@ -50,13 +51,15 @@ const handler = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/", // You can change to your custom login page
+    signIn: "/", // Or your custom login route
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

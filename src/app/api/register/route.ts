@@ -3,7 +3,7 @@
 // ⛔ Fix for Edge Runtime issues (required for Prisma + bcrypt)
 export const runtime = 'nodejs';
 
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { prisma } from '@/app/libs/prismadb';
 import { NextResponse } from 'next/server';
 
